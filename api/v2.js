@@ -6,6 +6,7 @@ const modelFinder = require(`${cwd}/middleware/model-finder.js`);
 const router = express.Router();
 const bearer = require('../auth/middleware/bearer.js');
 const permissions = require('../auth/middleware/acl.js');
+const upload = require('../services/upload');
 
 // Evaluate the model, dynamically
 router.param('model', modelFinder.load);
@@ -29,6 +30,10 @@ router.get('/:model', bearer, permissions('read'), handleGetAll);
 router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
 router.put('/:model/:id', bearer, permissions('update'), handlePut);
 router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
+
+router.get('/imghandler/images', handleGetImages);
+router.post('/imghandler/upload', upload.single('picture'), handleUpload);
+
 //route JUST for updated comments?
 //router.put('/comments/')
 //^^put request, on specific listing :id,
@@ -43,6 +48,43 @@ router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
 //       console.log(err);
 //   }
 // );
+
+const Image = require('../models/images/images-model.js');
+
+async function handleGetImages (req, res, next){
+  try {
+    let images = await Image.get(req.query);
+    return res.status(200).json({ images, msg: 'image info fetched'    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'some error occured' });
+  }
+}
+
+async function handleUpload(req, res, next){
+  try {
+    if (req.file && req.file.path) {
+      const image = new Image({
+        description: req.body.desc,
+        url: req.file.path,
+      });
+      console.log(req.file.path);
+      await image.create(image);
+
+      return res.status(200).json({ msg: 'image successfully saved' });
+    } else {
+      console.log(req.file);
+      return res.status(422).json({ error: 'invalid' });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'some error occured' });
+    next(e);
+  }
+
+}
+
+
 
 
 async function handleGetAll(request, response, next) {

@@ -1,0 +1,31 @@
+{
+  "name": "cloudinaryserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davee-401-advanced-javascript/cloudinaryserver.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davee-401-advanced-javascript/cloudinaryserver/issues"
+  },
+  "homepage": "https://github.com/davee-401-advanced-javascript/cloudinaryserver#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cloudinary": "^1.23.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.13",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0"
+  }
+}

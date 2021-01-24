@@ -14,13 +14,16 @@ const listings = mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required:true },
   imageUrl: { type: String, required:true },
-  userName: { type: String, required:true },
-  userId: { type: String, required:true },
+  creatorUserName: { type: String, required:true },
+  creatorUserId: { type: String, required:true },
   categories: { type: String, required:true },
   location:{ type: String, required:true },
   itemStatus: { type: Boolean, required:true },
   comments:[],
+  commentors: [],
 });
+
+
 
 
 

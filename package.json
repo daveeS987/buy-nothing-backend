@@ -20,8 +20,10 @@
   "homepage": "https://github.com/davee-401-advanced-javascript/authenticated-api-server#readme",
   "dependencies": {
     "@code-fellows/supergoose": "^1.0.11",
+    "axios": "^0.21.1",
     "base-64": "^1.0.0",
     "bcrypt": "^5.0.0",
+    "cloudinary": "^1.23.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -29,6 +31,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9",
     "mongoose-schema-jsonschema": "^1.4.4",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "superagent": "^6.1.0"
   }
 }
