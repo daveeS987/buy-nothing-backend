@@ -30,11 +30,18 @@ router.get('/imghandler/images', handleGetImages);
 router.post('/imghandler/upload', upload.single('picture'), handleUpload);
 
 router.get('/:model', handleGetAll);
-router.post('/:model', bearer, permissions('create'), handlePost);
-router.get('/:model', bearer, permissions('read'), handleGetAll);
-router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
-router.put('/:model/:id', bearer, permissions('update'), handlePut);
-router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
+// router.post('/:model', bearer, permissions('create'), handlePost);
+// router.get('/:model', bearer, permissions('read'), handleGetAll);
+// router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
+// router.put('/:model/:id', bearer, permissions('update'), handlePut);
+// router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
+
+// -------- withoutAuth ---------- //
+router.post('/:model', handlePost);
+router.get('/:model',  handleGetAll);
+router.get('/:model/:id',  handleGetOne);
+router.put('/:model/:id',  handlePut);
+router.delete('/:model/:id', handleDelete);
 
 
 //route JUST for updated comments?
@@ -82,9 +89,8 @@ async function handleUpload(req, res, next){
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'some error occured' });
-    next(e);
+    // next(error);
   }
-
 }
 
 
