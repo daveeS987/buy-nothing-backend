@@ -7,6 +7,9 @@ const router = express.Router();
 const bearer = require('../auth/middleware/bearer.js');
 const permissions = require('../auth/middleware/acl.js');
 const upload = require('../services/upload');
+const Image = require('../models/images/images-model.js');
+
+const image = new Image();
 
 // Evaluate the model, dynamically
 router.param('model', modelFinder.load);
@@ -23,6 +26,8 @@ router.get('/:model/schema', (request, response) => {
   response.status(200).json(request.model.jsonSchema());
 });
 
+router.get('/imghandler/images', handleGetImages);
+router.post('/imghandler/upload', upload.single('picture'), handleUpload);
 
 router.get('/:model', handleGetAll);
 router.post('/:model', bearer, permissions('create'), handlePost);
@@ -31,8 +36,6 @@ router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
 router.put('/:model/:id', bearer, permissions('update'), handlePut);
 router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
 
-router.get('/imghandler/images', handleGetImages);
-router.post('/imghandler/upload', upload.single('picture'), handleUpload);
 
 //route JUST for updated comments?
 //router.put('/comments/')
@@ -49,11 +52,11 @@ router.post('/imghandler/upload', upload.single('picture'), handleUpload);
 //   }
 // );
 
-const Image = require('../models/images/images-model.js');
+
 
 async function handleGetImages (req, res, next){
   try {
-    let images = await Image.get(req.query);
+    let images = await image.get();
     return res.status(200).json({ images, msg: 'image info fetched'    });
   } catch (error) {
     console.error(error);
@@ -64,14 +67,14 @@ async function handleGetImages (req, res, next){
 async function handleUpload(req, res, next){
   try {
     if (req.file && req.file.path) {
-      const image = new Image({
+      const body = {
         description: req.body.desc,
         url: req.file.path,
-      });
-      console.log(req.file.path);
-      await image.create(image);
+      };
+      // console.log(req.file.path);
+      let createdImage = await image.create(body);
 
-      return res.status(200).json({ msg: 'image successfully saved' });
+      return res.status(200).json({ msg: 'image successfully saved', createdImage });
     } else {
       console.log(req.file);
       return res.status(422).json({ error: 'invalid' });
