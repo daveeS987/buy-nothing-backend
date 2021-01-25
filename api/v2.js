@@ -88,7 +88,7 @@ async function handleUpload(req, res, next){
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'some error occured' });
+    return res.status(500).json({ error: 'Error occured when trying to upload' });
     // next(error);
   }
 }
@@ -138,7 +138,7 @@ async function handlePut(request, response, next) {
 
 async function handleDelete(request, response, next) {
   try {
-    let result = await request.model.delete(request.params.id);
+    await request.model.delete(request.params.id);
     response.status(200).json({});
   } catch(e) {
     next(e);
