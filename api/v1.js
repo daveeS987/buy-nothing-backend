@@ -4,6 +4,9 @@ const cwd = process.cwd();
 const express = require('express');
 const router = express.Router();
 const modelFinder = require(`${cwd}/middleware/model-finder.js`);
+const upload = require('../services/upload.js');
+const Image = require('../models/images/images-model.js');
+const image = new Image();
 
 router.param('model', modelFinder.load);
 
@@ -19,12 +22,47 @@ router.get('/:model/schema', (request, response) => {
   response.status(200).json(request.model.jsonSchema());
 });
 
+router.get('/imghandler/images', handleGetImages);
+router.post('/imghandler/upload', upload.single('picture'), handleUpload);
 
 router.get('/:model', handleGetAll);
 router.post('/:model', handlePost);
 router.get('/:model/:id', handleGetOne);
 router.put('/:model/:id', handlePut);
 router.delete('/:model/:id', handleDelete);
+
+
+
+
+async function handleGetImages (req, res, next){
+  try {
+    let images = await image.get();
+    return res.status(200).json({ images, msg: 'image info fetched'    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'some error occured' });
+  }
+}
+
+async function handleUpload(req, res, next){
+  try {
+    if (req.file && req.file.path) {
+      const body = {
+        description: req.body.desc,
+        url: req.file.path,
+      };
+      let createdImage = await image.create(body);
+
+      return res.status(200).json({ msg: 'image successfully saved', createdImage });
+    } else {
+      console.log(req.file);
+      return res.status(422).json({ error: 'invalid' });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Error occured when trying to upload' });
+  }
+}
 
 
 async function handleGetAll(request, response, next) {

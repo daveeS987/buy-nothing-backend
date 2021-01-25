@@ -8,7 +8,6 @@ const bearer = require('../auth/middleware/bearer.js');
 const permissions = require('../auth/middleware/acl.js');
 const upload = require('../services/upload');
 const Image = require('../models/images/images-model.js');
-
 const image = new Image();
 
 // Evaluate the model, dynamically
@@ -78,7 +77,6 @@ async function handleUpload(req, res, next){
         description: req.body.desc,
         url: req.file.path,
       };
-      // console.log(req.file.path);
       let createdImage = await image.create(body);
 
       return res.status(200).json({ msg: 'image successfully saved', createdImage });
@@ -89,7 +87,6 @@ async function handleUpload(req, res, next){
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Error occured when trying to upload' });
-    // next(error);
   }
 }
 
