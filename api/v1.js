@@ -27,40 +27,53 @@ router.put('/:model/:id', handlePut);
 router.delete('/:model/:id', handleDelete);
 
 
-function handleGetAll(request, response, next) {
-  request.model.get(request.query)
-    .then(data => {
-      const output = {
-        count: data.length,
-        results: data,
-      };
-      response.status(200).json(output);
-    })
-    .catch(next);
+async function handleGetAll(request, response, next) {
+  try {
+    let list = await request.model.get(request.query);
+    const output = {
+      count: list.length,
+      results: list,
+    };
+    response.status(200).json(output);
+  } catch(e) {
+    next(e);
+  }
 }
 
-function handleGetOne(request, response, next) {
-  request.model.get({ _id: request.params.id })
-    .then(result => response.status(200).json(result[0]))
-    .catch(next);
+async function handleGetOne(request, response, next) {
+  try {
+    let result = await request.model.get({ _id: request.params.id });
+    response.status(200).json(result[0]);
+  } catch(e) {
+    next(e);
+  }
 }
 
-function handlePost(request, response, next) {
-  request.model.create(request.body)
-    .then(result => response.status(200).json(result))
-    .catch(next);
+async function handlePost(request, response, next) {
+  try {
+    let result = await request.model.create(request.body);
+    response.status(200).json(result);
+  } catch(e) {
+    next(e);
+  }
 }
 
-function handlePut(request, response, next) {
-  request.model.update(request.params.id, request.body)
-    .then(result => response.status(200).json(result))
-    .catch(next);
+async function handlePut(request, response, next) {
+  try {
+    let result = await request.model.update(request.params.id, request.body);
+    response.status(200).json(result);
+  } catch(e) {
+    next(e);
+  }
 }
 
-function handleDelete(request, response, next) {
-  request.model.delete(request.params.id)
-    .then(result => response.status(200).json({}))
-    .catch(next);
+async function handleDelete(request, response, next) {
+  try {
+    await request.model.delete(request.params.id);
+    response.status(200).json({});
+  } catch(e) {
+    next(e);
+  }
 }
 
 module.exports = router;
