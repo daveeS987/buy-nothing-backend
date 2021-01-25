@@ -28,19 +28,11 @@ router.get('/:model/schema', (request, response) => {
 router.get('/imghandler/images', handleGetImages);
 router.post('/imghandler/upload', upload.single('picture'), handleUpload);
 
-router.get('/:model', handleGetAll);
-// router.post('/:model', bearer, permissions('create'), handlePost);
-// router.get('/:model', bearer, permissions('read'), handleGetAll);
-// router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
-// router.put('/:model/:id', bearer, permissions('update'), handlePut);
-// router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
-
-// -------- withoutAuth ---------- //
-router.post('/:model', handlePost);
-router.get('/:model',  handleGetAll);
-router.get('/:model/:id',  handleGetOne);
-router.put('/:model/:id',  handlePut);
-router.delete('/:model/:id', handleDelete);
+router.get('/:model', bearer, permissions('read'), handleGetAll);
+router.post('/:model', bearer, permissions('create'), handlePost);
+router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
+router.put('/:model/:id', bearer, permissions('update'), handlePut);
+router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
 
 
 //route JUST for updated comments?
@@ -57,7 +49,6 @@ router.delete('/:model/:id', handleDelete);
 //       console.log(err);
 //   }
 // );
-
 
 
 async function handleGetImages (req, res, next){
@@ -89,9 +80,6 @@ async function handleUpload(req, res, next){
     return res.status(500).json({ error: 'Error occured when trying to upload' });
   }
 }
-
-
-
 
 async function handleGetAll(request, response, next) {
   try {

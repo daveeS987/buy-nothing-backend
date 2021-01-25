@@ -33,7 +33,6 @@ router.delete('/:model/:id', handleDelete);
 
 
 
-
 async function handleGetImages (req, res, next){
   try {
     let images = await image.get();
