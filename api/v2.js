@@ -65,7 +65,7 @@ async function handleUpload(req, res, next){
   try {
     if (req.file && req.file.path) {
       const body = {
-        description: req.body.desc,
+        // description: req.body.desc,
         url: req.file.path,
       };
       let createdImage = await image.create(body);
