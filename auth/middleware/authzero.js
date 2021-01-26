@@ -6,7 +6,6 @@ const users = require('../models/users-model.js');
 module.exports = async (req, res, next) => {
 
   try {
-    //this console log should have user email:
     console.log('user email console log', req.body.email);
 
     // let authorization = req.headers.authorization;
@@ -16,6 +15,21 @@ module.exports = async (req, res, next) => {
     let userEmail = req.body.email;
 
     let userRecord = await users.validateAuthZero(userEmail);
+    console.log(' line 18  failed userRecord:', userRecord);
+
+    if(!userRecord) {
+      let obj = {
+        username: req.body.email,
+        userEmail: req.body.email,
+        role: 'admin',
+        myListings: [],
+        followedListings: [],
+      };
+      
+      let record = new users(obj);
+      userRecord = await record.save();
+      console.log('userRecord line 31:', userRecord);
+    }
 
     req.token = userRecord.generateToken();
     req.user = userRecord;

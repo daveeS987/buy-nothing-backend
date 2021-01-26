@@ -8,13 +8,14 @@ const jwt = require('jsonwebtoken');
 const users = mongoose.Schema({
   username: { type: String, required: true },
   userEmail: {type: String, required: true},
-  password: { type: String, required: true },
   role: { type: String, default: 'admin', enum: ['guest', 'author', 'editor', 'admin'] },
+  myListings: [],
+  followedListings: [],
 });
 
-users.pre('save', async function () {
-  this.password = await bcrypt.hash(this.password, 5);
-});
+// users.pre('save', async function () {
+//   this.password = await bcrypt.hash(this.password, 5);
+// });
 
 const roles = {
   guest: ['read'],
@@ -39,13 +40,7 @@ users.statics.validateBasic = async function (username, password) {
 users.statics.validateAuthZero = async function (userEmail) {
   try{
     let user = await this.findOne({ userEmail: userEmail });
-
-    if(user){
-      return user;
-    } else {
-
-    }
-    
+    return user;
   }catch(e){
     console.log(e);
     return undefined;

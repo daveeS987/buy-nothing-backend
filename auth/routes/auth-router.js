@@ -25,14 +25,16 @@ router.post('/authZero', authZero, handleAuthZero);
 async function handleAuthZero(req, res, next) {
 
   console.log('req.body', req.body);
-  // login with authzero
+  console.log('req.token', req.token);
+  console.log('req.user', req.user);
+
   try {
-    // let object = {
-    //   token: req.token,
-    //   user: req.user,
-    // };
+    let object = {
+      token: req.token,
+      user: req.user,
+    };
     res.set('auth', req.token);
-    res.status(200).json(req.body);
+    res.status(200).json(object);
   } catch(e) {
     next(e.message);
   }
