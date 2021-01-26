@@ -18,13 +18,13 @@ router.get('/article', bearerAuth, can('create'), userCanCreate);
 router.get('/article', bearerAuth, can('read'), userCanRead);
 router.get('/oauth', oAuth, handleOAuthRoute);
 
-
+// *** Remember to change line 27: This is temporary for development purposes
 async function handleSignUp(req, res, next) {
   try {
     let obj = {
       username: req.body.username,
       password: req.body.password,
-      role: req.body.role,
+      role: req.body.role || 'admin',
     };
     
     let record = new userModel(obj);
