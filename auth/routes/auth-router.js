@@ -8,6 +8,7 @@ const basicAuth = require('../middleware/basic.js');
 const bearerAuth = require('../middleware/bearer.js');
 const oAuth = require('../middleware/oauth.js');
 const can = require('../middleware/acl.js');
+const authZero = require('../middleware/authzero.js');
 
 router.post('/signup', handleSignUp);
 router.post('/signin', basicAuth, handleSignIn);
@@ -18,13 +19,32 @@ router.get('/article', bearerAuth, can('create'), userCanCreate);
 router.get('/article', bearerAuth, can('read'), userCanRead);
 router.get('/oauth', oAuth, handleOAuthRoute);
 
+router.post('/authZero', authZero, handleAuthZero);
+
+
+async function handleAuthZero(req, res, next) {
+
+  console.log('req.body', req.body);
+  // login with authzero
+  try {
+    // let object = {
+    //   token: req.token,
+    //   user: req.user,
+    // };
+    res.set('auth', req.token);
+    res.status(200).json(req.body);
+  } catch(e) {
+    next(e.message);
+  }
+}
+
 // *** Remember to change line 27: This is temporary for development purposes
 async function handleSignUp(req, res, next) {
   try {
     let obj = {
       username: req.body.username,
       password: req.body.password,
-      role: req.body.role || 'admin',
+      role: req.body.role,
     };
     
     let record = new userModel(obj);

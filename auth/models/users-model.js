@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 // taking out role: required: true temporarily for development
 const users = mongoose.Schema({
   username: { type: String, required: true },
+  userEmail: {type: String, required: true},
   password: { type: String, required: true },
   role: { type: String, default: 'admin', enum: ['guest', 'author', 'editor', 'admin'] },
 });
@@ -33,6 +34,22 @@ users.statics.validateBasic = async function (username, password) {
 
   if (isValid) { return user; }
   else { return undefined; }
+};
+
+users.statics.validateAuthZero = async function (userEmail) {
+  try{
+    let user = await this.findOne({ userEmail: userEmail });
+
+    if(user){
+      return user;
+    } else {
+
+    }
+    
+  }catch(e){
+    console.log(e);
+    return undefined;
+  }
 };
 
 
