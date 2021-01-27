@@ -1,11 +1,13 @@
-# buy nothing backend
+# Buy Nothing Back End
 
-### Author: Davee Sok
+### Author: Davee Sok, Ryan Geddes, Jonny Lee, Sarah Shatto
 
 ### Links and Resources
 
-- [ci/cd](https://github.com/davee-401-advanced-javascript/authenticated-api-server/actions) (GitHub Actions)
-- [back-end server url](https://davee-auth-api-server.herokuapp.com/)
+https://buynothingbackend.herokuapp.com/
+
+- [ci/cd](https://github.com/401-javascript-final-DRJS/buy-nothing-backend/actions) (GitHub Actions)
+- [back-end server url](https://buynothingbackend.herokuapp.com)
 <!--
 - [front-end application](http://xyz.com) (when applicable) -->
 
