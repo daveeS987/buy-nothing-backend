@@ -15,7 +15,6 @@ module.exports = async (req, res, next) => {
     let userEmail = req.body.email;
 
     let userRecord = await users.validateAuthZero(userEmail);
-    console.log(' line 18  failed userRecord:', userRecord);
 
     if(!userRecord) {
       let obj = {
@@ -28,8 +27,9 @@ module.exports = async (req, res, next) => {
       
       let record = new users(obj);
       userRecord = await record.save();
-      console.log('userRecord line 31:', userRecord);
     }
+
+    console.log('userRecord line 32:', userRecord);
 
     req.token = userRecord.generateToken();
     req.user = userRecord;

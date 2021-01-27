@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 // taking out role: required: true temporarily for development
 const users = mongoose.Schema({
   username: { type: String, required: true },
-  userEmail: {type: String, required: true},
+  userEmail: {type: String, required: true, unique: true},
   role: { type: String, default: 'admin', enum: ['guest', 'author', 'editor', 'admin'] },
   myListings: [],
   followedListings: [],
@@ -49,10 +49,12 @@ users.statics.validateAuthZero = async function (userEmail) {
 
 
 users.methods.generateToken = function () {
+
   let tokenObject = {
     username: this.username,
     role: this.role,
     permissions: roles[this.role],
+    mongoId: this._id,
   };
   let options = {
     expiresIn: 300,
