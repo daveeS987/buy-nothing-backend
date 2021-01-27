@@ -1,25 +1,18 @@
 'use strict';
 
-const base64 = require('base-64');
 const users = require('../models/users-model.js');
 
 module.exports = async (req, res, next) => {
 
   try {
-    console.log('user email console log', req.body.email);
 
-    // let authorization = req.headers.authorization;
-    // let encoded = authorization.split(' ')[1];
-    //let creds = req.body;
-    //let [userEmail, password] = creds.split(':');
-    let userEmail = req.body.email;
-
-    let userRecord = await users.validateAuthZero(userEmail);
+    let userRecord = await users.validateAuthZero(req.body.email);
 
     if(!userRecord) {
       let obj = {
-        username: req.body.email,
+        username: req.body.name,
         userEmail: req.body.email,
+        userPicture: req.body.picture,
         role: 'admin',
         myListings: [],
         followedListings: [],
@@ -28,8 +21,6 @@ module.exports = async (req, res, next) => {
       let record = new users(obj);
       userRecord = await record.save();
     }
-
-    console.log('userRecord line 32:', userRecord);
 
     req.token = userRecord.generateToken();
     req.user = userRecord;
