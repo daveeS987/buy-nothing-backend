@@ -53,8 +53,12 @@ users.methods.generateToken = function () {
 
   let tokenObject = {
     username: this.username,
+    userEmail: this.userEmail,
+    userPicture: this.userPicture,
     role: this.role,
     permissions: roles[this.role],
+    myListings: this.myListings,
+    followedListings: this.followedListings,
     mongoId: this._id,
   };
   let options = {
