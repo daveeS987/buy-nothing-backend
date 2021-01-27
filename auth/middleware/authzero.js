@@ -1,6 +1,5 @@
 'use strict';
 
-const base64 = require('base-64');
 const users = require('../models/users-model.js');
 
 module.exports = async (req, res, next) => {
@@ -13,6 +12,7 @@ module.exports = async (req, res, next) => {
       let obj = {
         username: req.body.name,
         userEmail: req.body.email,
+        userPicture: req.body.picture,
         role: 'admin',
         myListings: [],
         followedListings: [],

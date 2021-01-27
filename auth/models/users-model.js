@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const users = mongoose.Schema({
   username: { type: String, required: true },
   userEmail: {type: String, required: true, unique: true},
+  userPicture: {type: String, required: true},
   role: { type: String, default: 'admin', enum: ['guest', 'author', 'editor', 'admin'] },
   myListings: [],
   followedListings: [],
@@ -30,7 +31,7 @@ users.methods.can = function (capability) {
 
 
 users.statics.validateBasic = async function (username, password) {
-  let user = await this.findOne({ username: username });
+  let user = await this.findOne({ userEmail: username });
   let isValid = await bcrypt.compare(password, user.password);
 
   if (isValid) { return user; }
