@@ -6,7 +6,7 @@ require('mongoose-schema-jsonschema')(mongoose);
 
 const images = mongoose.Schema({
   url: { type: String },
-  description: { type: String },
+  // description: { type: String },
 });
 
 const schema = mongoose.model('images', images);

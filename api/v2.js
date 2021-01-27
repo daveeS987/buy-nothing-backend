@@ -8,7 +8,6 @@ const bearer = require('../auth/middleware/bearer.js');
 const permissions = require('../auth/middleware/acl.js');
 const upload = require('../services/upload');
 const Image = require('../models/images/images-model.js');
-
 const image = new Image();
 
 // Evaluate the model, dynamically
@@ -29,19 +28,11 @@ router.get('/:model/schema', (request, response) => {
 router.get('/imghandler/images', handleGetImages);
 router.post('/imghandler/upload', upload.single('picture'), handleUpload);
 
-router.get('/:model', handleGetAll);
-// router.post('/:model', bearer, permissions('create'), handlePost);
-// router.get('/:model', bearer, permissions('read'), handleGetAll);
-// router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
-// router.put('/:model/:id', bearer, permissions('update'), handlePut);
-// router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
-
-// -------- withoutAuth ---------- //
-router.post('/:model', handlePost);
-router.get('/:model',  handleGetAll);
-router.get('/:model/:id',  handleGetOne);
-router.put('/:model/:id',  handlePut);
-router.delete('/:model/:id', handleDelete);
+router.get('/:model', bearer, permissions('read'), handleGetAll);
+router.post('/:model', bearer, permissions('create'), handlePost);
+router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
+router.put('/:model/:id', bearer, permissions('update'), handlePut);
+router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
 
 
 //route JUST for updated comments?
@@ -60,7 +51,6 @@ router.delete('/:model/:id', handleDelete);
 // );
 
 
-
 async function handleGetImages (req, res, next){
   try {
     let images = await image.get();
@@ -75,10 +65,9 @@ async function handleUpload(req, res, next){
   try {
     if (req.file && req.file.path) {
       const body = {
-        description: req.body.desc,
+        // description: req.body.desc,
         url: req.file.path,
       };
-      // console.log(req.file.path);
       let createdImage = await image.create(body);
 
       return res.status(200).json({ msg: 'image successfully saved', createdImage });
@@ -88,13 +77,9 @@ async function handleUpload(req, res, next){
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'some error occured' });
-    // next(error);
+    return res.status(500).json({ error: 'Error occured when trying to upload' });
   }
 }
-
-
-
 
 async function handleGetAll(request, response, next) {
   try {
@@ -138,7 +123,7 @@ async function handlePut(request, response, next) {
 
 async function handleDelete(request, response, next) {
   try {
-    let result = await request.model.delete(request.params.id);
+    await request.model.delete(request.params.id);
     response.status(200).json({});
   } catch(e) {
     next(e);
