@@ -8,8 +8,6 @@ https://buynothingbackend.herokuapp.com/
 
 - [ci/cd](https://github.com/401-javascript-final-DRJS/buy-nothing-backend/actions) (GitHub Actions)
 - [back-end server url](https://buynothingbackend.herokuapp.com)
-<!--
-- [front-end application](http://xyz.com) (when applicable) -->
 
 ### Setup
 
@@ -18,8 +16,8 @@ https://buynothingbackend.herokuapp.com/
 Add the following into an .env file:
 
 ```
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017/authenticated-api-server
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/buy-nothing-backend
 SECRET= pick a secret word
 CLIENT_ID= get this from github
 CLIENT_SECRET= get this from github
@@ -27,11 +25,15 @@ STATE= pick anything you want
 TOKEN_SERVER=https://github.com/login/oauth/access_token
 REDIRECT_URI=http://localhost:3000/oauth
 REMOTE_API=https://api.github.com/user
+CLOUD_NAME=  <<Get from Cloudinary Account>>
+API_KEY= <<Get from Cloudinary Account>>
+API_SECRET= <<Get from Cloudinary Account>>
 ```
 
 #### How to initialize/run your application (where applicable)
 
 - Clone repository
+- Install dependencies: `npm install`
 - Enter: `npm start`  
   or: `nodemon index.js` into command line
 
