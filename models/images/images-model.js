@@ -1,15 +1,7 @@
 'use strict';
 
 const Model = require('../mongo.js');
-const mongoose = require('mongoose');
-require('mongoose-schema-jsonschema')(mongoose);
-
-const images = mongoose.Schema({
-  url: { type: String },
-  // description: { type: String },
-});
-
-const schema = mongoose.model('images', images);
+const schema = require('./images-schema.js');
 
 class Images extends Model {
   constructor() {

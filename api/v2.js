@@ -6,7 +6,7 @@ const modelFinder = require(`${cwd}/middleware/model-finder.js`);
 const router = express.Router();
 const bearer = require('../auth/middleware/bearer.js');
 const permissions = require('../auth/middleware/acl.js');
-const upload = require('../services/upload');
+const upload = require('../middleware/upload-image');
 const Image = require('../models/images/images-model.js');
 const image = new Image();
 
@@ -32,21 +32,6 @@ router.post('/:model', bearer, permissions('create'), handlePost);
 router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
 router.put('/:model/:id', bearer, permissions('update'), handlePut);
 router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
-
-//route JUST for updated comments?
-//router.put('/comments/')
-//^^put request, on specific listing :id,
-//modify $push {"comments": {userid: blah, text: blah}}
-
-//syntax example:
-// Contact.findByIdAndUpdate(
-//   info._id,
-//   {$push: {"messages": {title: title, msg: msg}}},
-//   {safe: true, upsert: true, new : true},
-//   function(err, model) {
-//       console.log(err);
-//   }
-// );
 
 async function handleGetImages(req, res, next) {
   try {
