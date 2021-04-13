@@ -33,21 +33,6 @@ router.get('/:model/:id', bearer, permissions('read'), handleGetOne);
 router.put('/:model/:id', bearer, permissions('update'), handlePut);
 router.delete('/:model/:id', bearer, permissions('delete'), handleDelete);
 
-//route JUST for updated comments?
-//router.put('/comments/')
-//^^put request, on specific listing :id,
-//modify $push {"comments": {userid: blah, text: blah}}
-
-//syntax example:
-// Contact.findByIdAndUpdate(
-//   info._id,
-//   {$push: {"messages": {title: title, msg: msg}}},
-//   {safe: true, upsert: true, new : true},
-//   function(err, model) {
-//       console.log(err);
-//   }
-// );
-
 async function handleGetImages(req, res, next) {
   try {
     let images = await image.get();

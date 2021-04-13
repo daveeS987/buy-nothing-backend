@@ -2,8 +2,8 @@
 
 const cwd = process.cwd();
 const express = require('express');
-const router = express.Router();
 const modelFinder = require(`${cwd}/middleware/model-finder.js`);
+const router = express.Router();
 const upload = require('../services/upload.js');
 const Image = require('../models/images/images-model.js');
 const image = new Image();
