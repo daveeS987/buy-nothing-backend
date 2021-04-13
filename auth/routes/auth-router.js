@@ -4,13 +4,10 @@ const express = require('express');
 const router = express.Router();
 
 const userModel = require('../models/users-model.js');
-const basicAuth = require('../middleware/basic.js');
 const bearerAuth = require('../middleware/bearer.js');
 const can = require('../middleware/acl.js');
 const authZero = require('../middleware/authzero.js');
 
-router.post('/signup', handleSignUp);
-router.post('/signin', basicAuth, handleSignIn);
 router.get('/allUsers', bearerAuth, getAllUsers);
 router.get('/secret', bearerAuth, handleSecretRoute);
 router.get('/article', bearerAuth, can('update'), userCanUpdate);
@@ -30,42 +27,6 @@ async function handleAuthZero(req, res, next) {
     console.log('Handle AuthZero is sending this to front end:', output);
     res.set('auth', req.token);
     res.status(200).json(output);
-  } catch (e) {
-    next(e.message);
-  }
-}
-
-async function handleSignUp(req, res, next) {
-  try {
-    let obj = {
-      username: req.body.username,
-      password: req.body.password,
-      role: req.body.role,
-    };
-
-    let record = new userModel(obj);
-    let newUser = await record.save();
-    let token = record.generateToken();
-
-    let output = {
-      token: token,
-      user: newUser,
-    };
-    res.set('auth', token);
-    res.status(200).json(output);
-  } catch (e) {
-    next(e.message);
-  }
-}
-
-async function handleSignIn(req, res, next) {
-  try {
-    let object = {
-      token: req.token,
-      user: req.user,
-    };
-    res.set('auth', req.token);
-    res.status(200).json(object);
   } catch (e) {
     next(e.message);
   }
