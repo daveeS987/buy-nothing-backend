@@ -4,7 +4,6 @@ const base64 = require('base-64');
 const users = require('../models/users-model.js');
 
 module.exports = async (req, res, next) => {
-
   try {
     let authorization = req.headers.authorization;
     let encoded = authorization.split(' ')[1];

@@ -12,7 +12,9 @@ const images = mongoose.Schema({
 const schema = mongoose.model('images', images);
 
 class Images extends Model {
-  constructor() { super(schema); }
+  constructor() {
+    super(schema);
+  }
 }
 
 module.exports = Images;

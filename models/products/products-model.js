@@ -8,7 +8,9 @@ const schema = require('./products-schema.js');
  * @extends Model
  */
 class Products extends Model {
-  constructor() { super(schema); }
+  constructor() {
+    super(schema);
+  }
 }
 
 module.exports = Products;

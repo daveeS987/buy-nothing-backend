@@ -1,7 +1,6 @@
 'use strict';
 
 class Model {
-
   constructor(schema) {
     this.schema = schema;
   }
@@ -16,7 +15,6 @@ class Model {
     return this.schema.find(queryObject);
   }
 
-
   create(record) {
     let newRecord = new this.schema(record);
     return newRecord.save();
@@ -29,7 +27,6 @@ class Model {
   delete(_id) {
     return this.schema.findByIdAndDelete(_id);
   }
-
 }
 
 module.exports = Model;

@@ -7,9 +7,13 @@ const jwt = require('jsonwebtoken');
 // taking out role: required: true temporarily for development
 const users = mongoose.Schema({
   username: { type: String, required: true },
-  userEmail: {type: String, required: true, unique: true},
-  userPicture: {type: String, required: true},
-  role: { type: String, default: 'admin', enum: ['guest', 'author', 'editor', 'admin'] },
+  userEmail: { type: String, required: true, unique: true },
+  userPicture: { type: String, required: true },
+  role: {
+    type: String,
+    default: 'admin',
+    enum: ['guest', 'author', 'editor', 'admin'],
+  },
   myListings: [],
   followedListings: [],
 });
@@ -29,28 +33,28 @@ users.methods.can = function (capability) {
   return roles[this.role].includes(capability);
 };
 
-
 users.statics.validateBasic = async function (username, password) {
   let user = await this.findOne({ userEmail: username });
   let isValid = await bcrypt.compare(password, user.password);
 
-  if (isValid) { return user; }
-  else { return undefined; }
+  if (isValid) {
+    return user;
+  } else {
+    return undefined;
+  }
 };
 
 users.statics.validateAuthZero = async function (userEmail) {
-  try{
+  try {
     let user = await this.findOne({ userEmail: userEmail });
     return user;
-  }catch(e){
+  } catch (e) {
     console.log(e);
     return undefined;
   }
 };
 
-
 users.methods.generateToken = function () {
-
   let tokenObject = {
     username: this.username,
     userEmail: this.userEmail,
@@ -67,8 +71,6 @@ users.methods.generateToken = function () {
   let token = jwt.sign(tokenObject, process.env.SECRET, options);
   return token;
 };
-
-
 
 users.statics.authenticateWithToken = function (token) {
   const parsedToken = jwt.verify(token, process.env.SECRET);

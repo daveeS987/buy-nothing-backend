@@ -8,8 +8,7 @@ const TOKEN_SERVER = process.env.TOKEN_SERVER;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const STATE = process.env.STATE;
 const REMOTE_API = process.env.REMOTE_API;
-const userModel  = require('../models/users-model.js');
-
+const userModel = require('../models/users-model.js');
 
 module.exports = async (req, res, next) => {
   let code = req.query.code;
@@ -29,30 +28,28 @@ module.exports = async (req, res, next) => {
   next();
 };
 
-
 async function exchangeCodeForToken(code) {
-  let tokenResponse = await superagent.post(TOKEN_SERVER)
-    .send({
-      code: code,
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      redirect_uri: REDIRECT_URI,
-      state: STATE,
-      // grant_type: 'authorization_code',
-    });
+  let tokenResponse = await superagent.post(TOKEN_SERVER).send({
+    code: code,
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    redirect_uri: REDIRECT_URI,
+    state: STATE,
+    // grant_type: 'authorization_code',
+  });
   let access_token = tokenResponse.body.access_token;
   return access_token;
 }
 
 async function getRemoteUser(token) {
-  let userResponse = await superagent.get(REMOTE_API)
+  let userResponse = await superagent
+    .get(REMOTE_API)
     .set('user-agent', 'express-server')
     .set('Authorization', `token ${token}`);
 
   let user = userResponse.body;
   return user;
 }
-
 
 /*****************************************
 Is this userId in our mongo database?
@@ -66,9 +63,9 @@ Is this userId in our mongo database?
     set req.token to be OUR token (Generate a token)
 ******************************************/
 async function getLocalUser(userLogin) {
-  let userInDB = await userModel.findOne({username: userLogin});
+  let userInDB = await userModel.findOne({ username: userLogin });
 
-  if(!userInDB){
+  if (!userInDB) {
     let obj = {
       username: userLogin,
       password: Math.random(),

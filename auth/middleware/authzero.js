@@ -3,12 +3,10 @@
 const users = require('../models/users-model.js');
 
 module.exports = async (req, res, next) => {
-
   try {
-
     let userRecord = await users.validateAuthZero(req.body.email);
 
-    if(!userRecord) {
+    if (!userRecord) {
       let obj = {
         username: req.body.name,
         userEmail: req.body.email,
@@ -17,7 +15,7 @@ module.exports = async (req, res, next) => {
         myListings: [],
         followedListings: [],
       };
-      
+
       let record = new users(obj);
       userRecord = await record.save();
     }

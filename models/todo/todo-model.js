@@ -8,7 +8,9 @@ const schema = require('./todo-schema.js');
  * @extends Model
  */
 class ToDo extends Model {
-  constructor() { super(schema); }
+  constructor() {
+    super(schema);
+  }
 }
 
 module.exports = ToDo;

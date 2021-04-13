@@ -9,7 +9,7 @@ process.env.SECRET = 'secretForTest';
 
 // beforeAll
 // beforeEach
-afterEach(async() => {
+afterEach(async () => {
   console.log('testing after each');
   // await userModel.remove({});
   // run commond from mongoose to delte dataabse
@@ -23,7 +23,7 @@ describe('Proof of Life test', () => {
 });
 
 describe('POST /signup should work', () => {
-  it('Should create a new user', async()=> {
+  it('Should create a new user', async () => {
     let obj = {
       username: 'davee',
       password: 'davee',
@@ -39,10 +39,9 @@ describe('POST /signup should work', () => {
 });
 
 describe('POST /signin should work', () => {
-  it('POST /signin should work with correct authorization', async() => {
-    let response = await myServer.post('/signin').auth('davee','davee');
+  it('POST /signin should work with correct authorization', async () => {
+    let response = await myServer.post('/signin').auth('davee', 'davee');
     expect(response.body.token).toBeDefined();
     expect(response.status).toEqual(200);
   });
 });
-

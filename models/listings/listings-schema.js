@@ -3,7 +3,6 @@
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
 
-
 // const CommentSchema = mongoose.Schema({
 //   userName: { type: String, required:true },
 //   userId: { type: String, required:true },
@@ -12,26 +11,22 @@ require('mongoose-schema-jsonschema')(mongoose);
 
 const listings = mongoose.Schema({
   title: { type: String, required: true },
-  description: { type: String, required:true },
-  imageUrl: { type: String, required:true },
-  creatorUserName: { type: String, required:true },
-  creatorUserId: { type: String, required:true },
-  categories: { type: String, required:true },
-  location:{ type: String, required:true },
-  itemStatus: { type: Boolean, required:true },
-  comments:[],
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  creatorUserName: { type: String, required: true },
+  creatorUserId: { type: String, required: true },
+  categories: { type: String, required: true },
+  location: { type: String, required: true },
+  itemStatus: { type: Boolean, required: true },
+  comments: [],
   commentors: [],
 });
-
-
-
-
 
 module.exports = mongoose.model('listings', listings);
 
 //Arrays
 //Mongoose supports arrays of SchemaTypes and arrays of subdocuments.
-// Arrays of SchemaTypes are also called primitive arrays, and 
+// Arrays of SchemaTypes are also called primitive arrays, and
 //arrays of subdocuments are also called document arrays.
 //const ToySchema = new Schema({ name: String });
 // const ToyBoxSchema = new Schema({
@@ -43,6 +38,5 @@ module.exports = mongoose.model('listings', listings);
 // });
 //example array schema at docs:/
 //https://mongoosejs.com/docs/schematypes.html#arrays
-
 
 //https://stackoverflow.com/questions/33049707/push-items-into-mongo-array-via-mongoose

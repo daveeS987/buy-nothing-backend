@@ -21,9 +21,7 @@ router.get('/oauth', oAuth, handleOAuthRoute);
 
 router.post('/authZero', authZero, handleAuthZero);
 
-
 async function handleAuthZero(req, res, next) {
-
   try {
     let output = {
       token: req.token,
@@ -34,7 +32,7 @@ async function handleAuthZero(req, res, next) {
     console.log('Handle AuthZero is sending this to front end:', output);
     res.set('auth', req.token);
     res.status(200).json(output);
-  } catch(e) {
+  } catch (e) {
     next(e.message);
   }
 }
@@ -46,11 +44,11 @@ async function handleSignUp(req, res, next) {
       password: req.body.password,
       role: req.body.role,
     };
-    
+
     let record = new userModel(obj);
     let newUser = await record.save();
     let token = record.generateToken();
-    
+
     let output = {
       token: token,
       user: newUser,
@@ -70,7 +68,7 @@ async function handleSignIn(req, res, next) {
     };
     res.set('auth', req.token);
     res.status(200).json(object);
-  } catch(e) {
+  } catch (e) {
     next(e.message);
   }
 }
@@ -80,7 +78,7 @@ async function getAllUsers(req, res, next) {
     let allUsers = await userModel.find({});
     res.set('auth', req.token);
     res.status(200).json(allUsers);
-  } catch(e) {
+  } catch (e) {
     next(e);
   }
 }
@@ -108,6 +106,5 @@ async function handleOAuthRoute(req, res, next) {
   };
   res.status(200).json(output);
 }
-
 
 module.exports = router;

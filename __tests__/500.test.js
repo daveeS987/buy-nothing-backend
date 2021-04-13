@@ -5,7 +5,7 @@ const server = require('../server.js');
 const myServer = supergoose(server.app);
 
 describe('500 Error Test', () => {
-  it('Bad Category input should send 500 error', async() => {
+  it('Bad Category input should send 500 error', async () => {
     let obj = {
       name: 'missing description',
     };
@@ -13,7 +13,7 @@ describe('500 Error Test', () => {
     expect(response.status).toEqual(500);
   });
 
-  it('Bad product input should send 500 error', async() => {
+  it('Bad product input should send 500 error', async () => {
     let obj = {
       name: 'missing description',
     };
