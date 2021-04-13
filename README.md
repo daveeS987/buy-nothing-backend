@@ -19,12 +19,6 @@ Add the following into an .env file:
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/buy-nothing-backend
 SECRET= pick a secret word
-CLIENT_ID= get this from github
-CLIENT_SECRET= get this from github
-STATE= pick anything you want
-TOKEN_SERVER=https://github.com/login/oauth/access_token
-REDIRECT_URI=http://localhost:3000/oauth
-REMOTE_API=https://api.github.com/user
 CLOUD_NAME=  <<Get from Cloudinary Account>>
 API_KEY= <<Get from Cloudinary Account>>
 API_SECRET= <<Get from Cloudinary Account>>
@@ -42,17 +36,9 @@ API_SECRET= <<Get from Cloudinary Account>>
 The following routes are available:
 
 ```
-/signup
-/signin
 
-api/v1/categories
-api/v1/products
-api/v1/todo
 api/v1/listings
 
-api/v2/categories
-api/v2/products
-api/v2/todo
 api/v2/listings
 
 ```

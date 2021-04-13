@@ -6,7 +6,7 @@ const modelFinder = require(`${cwd}/middleware/model-finder.js`);
 const router = express.Router();
 const bearer = require('../auth/middleware/bearer.js');
 const permissions = require('../auth/middleware/acl.js');
-const upload = require('../services/upload');
+const upload = require('../middleware/upload-image');
 const Image = require('../models/images/images-model.js');
 const image = new Image();
 
