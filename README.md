@@ -39,7 +39,8 @@ This server performs crud operations on a listings collections and images collec
 
 ## Setup
 
-- Clone down this Repo
+- Clone down this repo
+- Make sure MongoDB is installed on your computer
 - Install dependencies: `npm install`
 - Create an account at https://cloudinary.com/ and get the following:
   - Cloud Name
