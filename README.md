@@ -51,7 +51,7 @@ This server performs crud operations on a listings collections and images collec
 ```
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/buy-nothing-backend
-SECRET= pick a secret word
+SECRET= ** pick a word, must match front end secret word. this is used to authenticate a token
 CLOUD_NAME=  <<Get from Cloudinary Account>>
 API_KEY= <<Get from Cloudinary Account>>
 API_SECRET= <<Get from Cloudinary Account>>
