@@ -28,12 +28,13 @@ Inspired by Buy Nothing. A web application for giving things away for free or fi
 
 ## Setup
 
-- Clone down this repo
--
-
-#### .Env Requirements
-
-Add the following into an .env file:
+- Clone down this Repo
+- Install dependencies: `npm install`
+- Create an account at https://cloudinary.com/ and get the following:
+  - Cloud Name
+  - API key
+  - API secret
+- Add the following into an .env file:
 
 ```
 PORT=5000
@@ -44,15 +45,20 @@ API_KEY= <<Get from Cloudinary Account>>
 API_SECRET= <<Get from Cloudinary Account>>
 ```
 
-#### How to use this server:
+- Run the server: `nodemon index.js`
+
+## How to use this server:
 
 The following routes are available:
 
 ```
-
 api/v1/listings
+api/v1/imghandler/images
+api/v1/imghandler/upload
 
 api/v2/listings
+api/v2/imghandler/images
+api/v2/imghandler/upload
 
 ```
 
