@@ -12,6 +12,16 @@ Inspired by Buy Nothing. A web application for giving things away for free or fi
 - [Front-End Website](https://buynothing-frontend.netlify.app/main)
 - [Front-End Repository](https://github.com/daveeS987/buy-nothing-frontend)
 
+## Overview
+
+This server performs crud operations on a listings collections and images collections. Certain routes can require authentication and authorization priveleges.
+
+## Architecture
+
+- The server uses an express framework and is deployed through heroku.
+- MongoDB is used to store listings information and image urls.
+- Actual images are not stored in our database, but a middleware in the image route, sends images to Cloudinary, and saves the url to our database.
+
 ## Dependencies and Tools
 
 <img align="left" alt="JavaScript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"/>
@@ -79,15 +89,18 @@ const listings = mongoose.Schema({
 });
 ```
 
-#### Tests
+## Tests
 
 <!-- - How do you run tests?
 - Any tests of note?
 - Describe any tests that you did not complete, skipped, etc -->
 
-In the terminal enter: `npm test`
+<!-- In the terminal enter: `npm test` -->
 
-#### UML
+in progress...
+no tests at this time
+
+## UML
 
 <!-- Link to an image of the UML for your application and response to events -->
 
