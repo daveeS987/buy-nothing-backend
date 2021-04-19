@@ -21,6 +21,7 @@ This server performs crud operations on a listings collections and images collec
 - The server uses an express framework and is deployed through heroku.
 - MongoDB is used to store listings information and image urls.
 - Actual images are not stored in our database, but a middleware in the image route, sends images to Cloudinary, and saves the url to our database.
+- Passwords are not stored in our database but handled through Auth0 on the frontend application.
 
 ## Dependencies and Tools
 
