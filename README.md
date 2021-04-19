@@ -4,7 +4,7 @@ Inspired by Buy Nothing. A web application for giving things away for free or fi
 
 **Contributors**: Davee Sok, Ryan Geddes, Sarah Shatto, Jonathon Lee.
 
-**Version**: 1.0.0
+![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)
 
 ## Links and Resources
 
@@ -102,7 +102,7 @@ const listings = mongoose.Schema({
 in progress...
 no tests at this time
 
-## UML
+<!-- ## UML -->
 
 <!-- Link to an image of the UML for your application and response to events -->
 
