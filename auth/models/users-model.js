@@ -1,7 +1,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // taking out role: required: true temporarily for development
@@ -31,17 +30,6 @@ const roles = {
 
 users.methods.can = function (capability) {
   return roles[this.role].includes(capability);
-};
-
-users.statics.validateBasic = async function (username, password) {
-  let user = await this.findOne({ userEmail: username });
-  let isValid = await bcrypt.compare(password, user.password);
-
-  if (isValid) {
-    return user;
-  } else {
-    return undefined;
-  }
 };
 
 users.statics.validateAuthZero = async function (userEmail) {
