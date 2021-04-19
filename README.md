@@ -1,15 +1,35 @@
 # Buy Nothing Back End
 
-### Author: Davee Sok, Ryan Geddes, Jonny Lee, Sarah Shatto
+Inspired by Buy Nothing. A web application for giving things away for free or finding things for free. This is the back-end server for [buynothing.netlify.app](https://buynothing-frontend.netlify.app/main)
 
-### Links and Resources
+**Contributors**: Davee Sok, Ryan Geddes, Sarah Shatto, Jonathon Lee.
 
-https://buynothingbackend.herokuapp.com/
+**Version**: 1.0.0
 
-- [ci/cd](https://github.com/401-javascript-final-DRJS/buy-nothing-backend/actions) (GitHub Actions)
-- [back-end server url](https://buynothingbackend.herokuapp.com)
+## Links and Resources
 
-### Setup
+- [Back-End Server Url](https://buynothingbackend.herokuapp.com/)
+- [Front-End Website](https://buynothing-frontend.netlify.app/main)
+- [Front-End Repository](https://github.com/daveeS987/buy-nothing-frontend)
+
+## Dependencies and Tools
+
+<img align="left" alt="JavaScript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"/>
+<img align="left" alt="Node.js" width="26px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.ict.social%2Fimages%2F5728%2Fnodejs_logo.png&f=1&nofb=1"/>
+<img align="left" alt="Express.js" width="26px" src="https://expressjs.com/images/express-facebook-share.png"/>
+<img align="left" alt="Mongo" width="26px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.iconscout.com%2Ficon%2Ffree%2Fpng-256%2Fmongodb-3-1175138.png&f=1&nofb=1"/>
+<img  align="left" alt="Cloudinary" width="26px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcloudinary-res.cloudinary.com%2Fimage%2Fupload%2Fc_scale%2Cfl_attachment%2Cw_500%2Fv1%2Flogo%2Ffor_white_bg%2Fcloudinary_icon_for_white_bg.png&f=1&nofb=1"/>
+
+</br>
+<br>
+<pre>
+<b>Javascript ➡ NodeJS ➡ ExpressJS ➡ MongoDB ➡ Cloudinary </b>
+</pre>
+
+## Setup
+
+- Clone down this repo
+-
 
 #### .Env Requirements
 
@@ -23,13 +43,6 @@ CLOUD_NAME=  <<Get from Cloudinary Account>>
 API_KEY= <<Get from Cloudinary Account>>
 API_SECRET= <<Get from Cloudinary Account>>
 ```
-
-#### How to initialize/run your application (where applicable)
-
-- Clone repository
-- Install dependencies: `npm install`
-- Enter: `npm start`  
-  or: `nodemon index.js` into command line
 
 #### How to use this server:
 
