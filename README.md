@@ -57,6 +57,11 @@ API_KEY= <<Get from Cloudinary Account>>
 API_SECRET= <<Get from Cloudinary Account>>
 ```
 
+- If you want a database in the cloud
+  - Go to https://www.mongodb.com/
+  - Create New project
+  - Create new cluster
+  - replace MONGODB_URI with the address mongo gives you
 - Run the server: `nodemon index.js`
 
 ## How to use this server:
